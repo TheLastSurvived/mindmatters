@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block title %}
+{{article.title}}
+{% endblock %}
+
+
+{% block main %}
+{{ ckeditor.load() }}
+<div>
+<div class="container">
+    
+    {%if 'name' in session and active_user.root==1%}
+    
+    <div class="my-3">
+        <button type="button" class="btn btn-dark mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Изменить
+          </button>
+          <a href="/delete-article/{{article.id}}" class="btn btn-danger mb-3">Удалить</a>
+          
+    </div>
+    {%endif%}
+
+
+    {% with messages = get_flashed_messages(True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <p class="m-2 flash {{category}}">{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Изменить</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Название</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        name="title" value="{{article.title}}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Категория</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        name="category" value="{{article.category}}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="disabledSelect" class="form-label">Цвет</label>
+                    <select id="disabledSelect" class="form-select" name="color">
+                        <option value="#FA7B04">#FA7B04</option>
+                        <option value="#EBD1B0">#EBD1B0</option>
+                        <option value="#40C5C0">#40C5C0</option>
+                        <option value="#EE999A">#EE999A</option>
+                        <option value="#26BB6B">#26BB6B</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Описание</label>
+                    {{ ckeditor.create(value=article.text) }}
+                </div>
+                <div class="form-group my-3">
+                    <label for="exampleFormControlFile1">Изображение</label> <br>
+                    <input type="file" class="form-control-file form-control-sm" id="exampleFormControlFile1"
+                        name="image">
+                </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            <button type="submit" class="btn btn-primary">Изменить</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-content py-2">
+        
+        {%if article.image_name%}
+        <div class=" d-flex align-items-center mb-5 justify-content-between article-head">
+            <div class="image">
+                <img src="../static/img/upload/{{article.image_name}}" class="image-fluid" alt="">
+            </div>
+            <div class="title mx-5">
+                <h1>{{article.title}}</h1>
+            </div>
+        </div>
+        {%else%}
+        <div class="title">
+            <h1>{{article.title}}</h1>
+        </div>
+        {%endif%}
+
+        <div class="text">
+           
+                {% autoescape false %}
+                {{article.text}}
+                {% endautoescape %}
+            
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

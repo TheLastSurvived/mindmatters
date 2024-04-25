@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block title %}
+{{question.title}}
+{% endblock %}
+
+
+{% block main %}
+<div class="container">
+    <ol class="breadcrumb py-3">
+        <li class="breadcrumb-item"><a href="/">Главная</a></li>
+        <li class="breadcrumb-item"><a href="/tests">Тесты</a> </li>
+        <li class="breadcrumb-item"><a href="/edit_test/{{test.id}}">{{test.title}}</a></li>
+        <li class="breadcrumb-item active "> <p class="text-truncate">{{question.title}}</p> </li>
+      </ol>
+
+
+
+<div class="text-center my-5">
+    <h2> {{question.title}}</h2>
+   
+    <div class="my-3">
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Добавить ответ
+        </button>
+
+    </div>
+    {% with messages = get_flashed_messages(True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <p class="m-2 flash {{category}}">{{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Добавить ответ</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Ответ</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" name="title" value="" placeholder="Ответ" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Балл</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" name="weight" value="" placeholder="Балл" required>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="my-5 container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Ответы</th>
+                <th scope="col">Балл</th>
+                <th scope="col">#</th>
+                <th scope="col">#</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for ans in answer%}
+            <tr>
+                <td>{{ans.title}} </td>
+                <td>{{ans.weight}} </td>
+                <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ans.id}}">Редактировать</button></td>
+                <td><a href="/delete-answer/{{question.id}}/{{ans.id}}/{{test.id}}" class="btn btn-danger">Удалить</a></td>
+                <div class="modal fade" id="exampleModal{{ans.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Изменить ответ</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="{{ url_for('edit_answer', id_question=question.id, id_answer=ans.id) }}">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Вопрос</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" name="title" value="{{ans.title}}" placeholder="Вопрос" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Балл</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp" name="weight" value="{{ans.weight}}" placeholder="Балл" required>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                <button type="submit" class="btn btn-primary">Изменить</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}
+Профиль
+{% endblock %}
+
+{% block main %}
+<div class="container my-5">
+  <div class="row d-flex justify-content-between align-items-center">
+    <div class="col">
+      <h1>Профиль{%if active_user.root==1%}(администратор){%else%}(пользователь){%endif%}</h1>
+    </div>
+    {%if active_user.root==1%}
+    <div class="col text-end">
+      <a href="/admin" class="btn btn-primary">Перейти в панель администратора</a>
+    </div>
+    {%endif%}
+  </div>
+
+  <table class="table my-5">
+    <thead>
+      <tr>
+        <th scope="col">Дата и время</th>
+        <th scope="col">Тест</th>
+        <th scope="col">Результат</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for el1, el2, el3 in zip(rezult_test_list,rezult,interpretation_list)%}
+      <tr>
+        <th>{{el2.date.strftime('%d.%m.%Y %H:%M')}}</th>
+        <td><a href="/test/{{el1.id}}">{{el1.title}}</a></td>
+        <td>{{el2.total_score}} баллов</td>
+        <td><button class="btn btn-outline-primary" data-bs-toggle="modal"
+            data-bs-target="#exampleModal{{el3.id}}">Просмотреть интерпретацию</button> </td>
+
+        <div class="modal fade" id="exampleModal{{el3.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Интерпретация</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                {% autoescape false %}
+                {{el3.text}}
+                {% endautoescape %}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+Регистрация
+{% endblock %}
+
+
+{% block main %}
+<div class="form-wrapper">
+    <div class="container">
+        <div class=" ">
+
+            <form action="#" method="post" class="mx-auto">
+                <h1>Регистрация</h1>
+                <div class="mb-3">
+                    <input type="text" name="name" class="form-control input-form" placeholder="имя пользователя"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <input type="email" name="email" class="form-control input-form" placeholder="email" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" name="password" class="form-control input-form" placeholder="пароль"
+                        required>
+                </div>
+
+                <button type="submit" class="standart-btn py-2 px-4">Далее</button>
+                {% with messages = get_flashed_messages(True) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <p class="m-2 flash {{category}}">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+{{test.title}}
+{% endblock %}
+
+{% block main %}
+<div class="question">
+    <div class="container">
+        <div class="">
+            <h1 class="text-center">{{test.title}}</h1>
+            <form method="post" class="mx-auto">
+                <h2>{{question.title}}</h2>
+
+                {%for answer in answers%}
+                <div class="form-check mb-3 d-flex align-items-center">
+                    <input style="border: 3px solid black;
+                    width: 32px;
+                    height: 32px;
+                    cursor: pointer;" class="form-check-input " type="radio" name="answer" value="{{answer.weight}}" id="flexRadioDefault{{answer.id}}" required>
+                    <label class="form-check-label mx-3" for="flexRadioDefault{{answer.id}}" style="cursor: pointer;">
+                        {{answer.title}}
+                    </label>
+                </div>
+                {%endfor%}
+
+                <button type="submit" class="standart-btn py-2 px-4">Далее</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

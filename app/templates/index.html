@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}
+Mind Matters
+{% endblock %}
+
+
+{% block main %}
+        <div class="header-wraper">
+        <div class="w-100 row d-flex align-items-center header-down">
+            <div class="header-down-text col-lg-6">
+                <div class="text-big">Забота о себе не эгоистична</div>
+                <div class="text-small">Узнавай новое о себе и своем ментальном состоянии</div>
+                <div class="links mt-5">
+                    <a href="/articles" class="m-2 p-3">Подробнее</a>
+                    <a href="/tests" class="m-2 p-3">К тестам</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="header-down-img">
+            <img src="../static/img/main2.svg" alt="" class="img-fluid">
+        </div>
+    </div>
+    <div class="tests">
+        <div class="container">
+            <div class="title-tests">
+                Популярные тесты
+            </div>
+            <div class="popular-tests">
+                {%for test in tests_random%}
+                <div class="test-example" style=" background-color: {{test.color}};">
+                    <a href="/test/{{test.id}}" class="text-link">{{test.title}} </a>
+                    <a href="/test/{{test.id}}"> <img src="../static/img/upload/{{test.image_name}}" class="image-fluid" width="100%" alt="" srcset=""></a>
+                </div>
+                {%endfor%}
+
+                <div class="more">
+                    <a href="/tests" class="">Смотреть еще</a>
+                </div>
+
+            </div>
+
+            <div class="popular-tests-moblie">
+                {%for test in tests_random%}
+                <div class="row" style=" background-color: {{test.color}};">
+                    <a href="/test/{{test.id}}"> <img src="../static/img/upload/{{test.image_name}}" class="image-fluid" width="30%" alt="" srcset=""></a>
+                    <a href="/test/{{test.id}}" class="text-link">Тест на тип любви </a>
+                </div>
+                {%endfor%}
+             
+
+                <div class="row ">
+                    <a href="/tests" class="text-link">Смотреть еще</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="articles">
+        <div class="container">
+
+            <div class="title-articles">
+                Популярные статьи
+            </div>
+
+            <div class="article-list">
+                {%for article in article_random%}
+                <div class="popular-article" style=" background-color: {{article.color}};">
+                    <img src="../static/img/article.png" alt="">
+                    <div class="article-text">
+                        <a href="/article/{{article.id}}" class="text-decoration-none text-dark">{{article.title}}</a>
+                    </div>
+                </div>
+                {%endfor%}
+
+                
+
+                <div class="links ">
+                    <a href="/articles" class="p-3">Смотреть еще</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

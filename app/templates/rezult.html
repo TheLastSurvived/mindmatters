@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}
+Результат
+{% endblock %}
+
+{% block main %}
+
+    <div class="rezult pb-5">
+        <div class="container">
+            <div class="rezult-header  py-5">
+                <h1 class="col text-center">Результат</h1>
+                {% with messages = get_flashed_messages(True) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <p class="m-2 flash {{category}}">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                <!-- 
+                <div class="col">
+                    <ul class="nav">
+                        <li><img src="../static/img/fill_star.svg" alt=""></li>
+                        <li><img src="../static/img/star.svg" alt=""></li>
+                        <li><img src="../static/img/star.svg" alt=""></li>
+                        <li><img src="../static/img/star.svg" alt=""></li>
+                        <li><img src="../static/img/star.svg" alt=""></li>
+                    </ul>
+                </div>
+                -->
+            </div>
+
+            <div class="rezult-text p-5">
+                <h2>Вы набрали {{total_score}} баллов</h2>
+                {% autoescape false %}
+                {{interpretation.text}}
+                {% endautoescape %}
+            </div>
+<!-- 
+            <div class="rezult-footer row d-flex align-items-center text-center">
+                <div class="my-3 col btn-rezult">
+                    <a href="#" class="standart-btn px-4 py-2 mx-3 my-3">Подробнее</a>
+                    <a href="#" class="standart-btn px-4 py-2">Пройти заново</a>
+                </div>
+                <div class="col d-flex favorites mx-3">
+                    <img src="../static/img/favorites.svg" alt="">
+                </div>
+            </diАv>
+  -->
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}
+Тесты
+{% endblock %}
+
+
+{% block main %}
+    <div class="articles-wrap">
+        <div class="container">
+            <div class=" articles-header ">
+                <div class="row g-3 d-flex justify-content-between align-items-center">
+                    <div class="col-lg-4">
+                        <h1>Все тесты</h1>
+                    </div>
+                    <div class="col-lg">
+                        <form>
+                            <input type="search" placeholder="Поиск" class="px-4 py-4 form-control" name="seach" required>
+                        </form>
+                    </div>
+
+                    {%if 'name' in session and active_user.root==1%}
+                    <div class="col-lg">
+                        <a href="/new-test" class="standart-btn py-2 px-4">Добавить тест +</a>
+                    </div>
+                    {%endif%}
+                </div>
+
+            </div>
+
+            <div class="popular-tests mb-5">
+
+                {%for test in tests%}
+                <div class="" style=" background-color: {{test.color}};">
+                    <a href="/test/{{test.id}}" class="text-link">{{test.title}} </a>
+                    {%if test.image_name%}
+                    <a href="/test/{{test.id}}"> <img src="../static/img/upload/{{test.image_name}}" class="img-fluid" alt="" srcset=""></a>
+                    {%endif%}
+                </div>
+                {%endfor%}
+
+            </div>
+
+            <div class="popular-tests-moblie">
+
+                {%for test in tests%}
+                <div class="row" style="background-color: {{test.color}};">
+                    {%if test.image_name%}
+                    <a href="/test/{{test.id}}"> <img src="../static/img/upload/{{test.image_name}}" alt="" class="img-fluid" srcset=""></a>
+                    {%endif%}
+                    <a href="/test/{{test.id}}" class="text-link">{{test.title}} </a>
+                </div>
+                {%endfor%}
+                
+
+            </div>
+
+        </div>
+    </div>
+
+    {% endblock %}
