@@ -16,6 +16,10 @@
     /* Chrome < 4, Legacy iOS */
 }
 
+*{
+    font-family: "Roboto", sans-serif;
+}
+
 .flash.ok {
     color: #198754;
     font-weight: bold;
