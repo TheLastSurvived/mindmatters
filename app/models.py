@@ -19,6 +19,7 @@ class Articles(db.Model):
     image_name = db.Column(db.String(100))
     category = db.Column(db.String(100))
     color = db.Column(db.String(100))
+    root = db.Column(db.Integer, default=1)
 
     def __repr__(self):
         return 'Articles %r' % self.id 

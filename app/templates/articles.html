@@ -38,10 +38,12 @@
         <div class="articles-grid">
             {%if articles%}
             {%for article in articles%}
+            {%if article.root==1%}
             <div class="article" style="background-color: {{article.color}};">
-                <a href="/article/{{article.id}}"> <img src="../static/img/upload/{{article.image_name}}" alt=""></a>
+                <a href="/article/{{article.id}}"> <img src="../static/img/upload/{{article.image_name}}" class="img-fluid" alt=""></a>
                 <p><a href="/article/{{article.id}}">{{article.title}}</a></p>
             </div>
+            {%endif%}
             {%endfor%}
             {%else%}
             <h1>Записей не найдено!</h1>
@@ -50,11 +52,13 @@
 
         <div class="articles-mobile">
             {%for article in articles%}
+            {%if article.root==1%}
             <div class="row article-mobile" style="background-color: {{article.color}};">
                 <p><a href="/article/{{article.id}}">{{article.title}}</a></p>
-                <a href="/article/{{article.id}}"> <img src="../static/img/upload/{{article.image_name}}" alt=""
+                <a href="/article/{{article.id}}"> <img src="../static/img/upload/{{article.image_name}}"  alt=""
                         class="img-fluid"></a>
             </div>
+            {%endif%}
             {%endfor%}
         </div>
 

@@ -88,6 +88,15 @@ def article(id):
     return render_template("article.html",article=article)
 
 
+@app.route('/add-offer/<int:id>', methods=['GET', 'POST'])
+def add_offer(id):
+    article = Articles.query.get(id)
+    article.root = 1
+    db.session.commit()
+    flash("Статья доступна для всех пользователей!", category="ok")
+    return redirect(url_for("article", id=article.id))
+
+
 @app.route('/delete-article/<int:id>')
 def delete_article(id):
     obj = Articles.query.filter_by(id=id).first()
@@ -110,7 +119,7 @@ def new_article():
             pic_name = str(uuid.uuid4()) + "_" + filename
             image.save("app/static/img/upload/" + pic_name)
         text = request.form.get('ckeditor')
-        articles = Articles(title=title,color=color,category=category,image_name=pic_name,text=text)
+        articles = Articles(title=title,color=color,category=category,image_name=pic_name,text=text, root=1)
         db.session.add(articles)
         db.session.commit()
         flash("Запись добавлена!", category="ok")
@@ -118,8 +127,29 @@ def new_article():
     return render_template("new-article.html")
 
 
+@app.route('/offer', methods=['GET', 'POST'])
+def offer():
+    pic_name =''
+    if request.method == 'POST':
+        title = request.form.get('title')
+        category = request.form.get('category')
+        color = request.form.get('color')
+        image = request.files['image']
+        if image:
+            filename = secure_filename(image.filename)
+            pic_name = str(uuid.uuid4()) + "_" + filename
+            image.save("app/static/img/upload/" + pic_name)
+        text = request.form.get('ckeditor')
+        articles = Articles(title=title,color=color,category=category,image_name=pic_name,text=text, root=0)
+        db.session.add(articles)
+        db.session.commit()
+        flash("Запись предложена!", category="ok")
+        return redirect(url_for("profile"))
+
+
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
+    articles_offer = Articles.query.filter_by(root=0).all()
     tests = Tests.query.all()
     if not 'name' in session:
         abort(401)
@@ -140,7 +170,7 @@ def profile():
         interpretation_list.append(Interpretation.query.filter_by(id_test=el.id).first())
 
     
-    return render_template("profile.html",rezult_test_list=rezult_test_list,rezult=rezult,interpretation_list=interpretation_list,zip=zip)
+    return render_template("profile.html",rezult_test_list=rezult_test_list,rezult=rezult,interpretation_list=interpretation_list,zip=zip,articles=articles_offer)
 
 
 @app.route('/tests', methods=['GET', 'POST'])
