@@ -5,7 +5,7 @@
 
 
 {% block main %}
-
+{{ ckeditor.load() }}
 <div class="articles-wrap">
     <div class="container">
         <div class="articles-header ">
@@ -15,15 +15,72 @@
                 </div>
                 <div class="col">
                     <form method="get">
-                        <input type="search" placeholder="Поиск" class="px-4 py-4" name="seach">
+                        <input type="search" placeholder="Поиск" class="px-4 py-4" id="seach-art" name="seach">
                     </form>
                 </div>
                 {%if 'name' in session and active_user.root==1%}
-                <div class="col-lg">
+                <div class="col-lg text-end">
                     <a href="/new-article" class="standart-btn py-2 px-4">Добавить статью +</a>
 
                 </div>
                 {%endif%}
+                {% if'name' in session and active_user.root==0%}
+
+                <div class="col text-end">
+                    <button type="button" class="btn standart-btn py-2 px-4" style="font-size:20px" data-bs-toggle="modal" data-bs-target="#exampleModal111">
+                      Предложить статью
+                    </button>
+                  </div>
+                  <div class="modal fade" id="exampleModal111" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Предложить статью</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <form method="post" enctype="multipart/form-data" action="/offer">
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Название</label>
+                              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                name="title" value="" required>
+                            </div>
+              
+                            <div class="mb-3">
+                              <label for="exampleInputEmail1" class="form-label">Категория</label>
+                              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                name="category" value="" required>
+                            </div>
+              
+                            <div class="mb-3">
+                              <label for="disabledSelect" class="form-label">Цвет</label>
+                              <select id="disabledSelect" class="form-select" name="color">
+                                <option value="#FA7B04">#FA7B04</option>
+                                <option value="#EBD1B0">#EBD1B0</option>
+                                <option value="#40C5C0">#40C5C0</option>
+                                <option value="#EE999A">#EE999A</option>
+                                <option value="#26BB6B">#26BB6B</option>
+                              </select>
+                            </div>
+              
+                            <div class="form-group">
+                              <label for="exampleFormControlTextarea1">Описание</label>
+                              {{ ckeditor.create() }}
+                            </div>
+                            <div class="form-group my-3">
+                              <label for="exampleFormControlFile1">Изображение</label> <br>
+                              <input type="file" class="form-control-file form-control-sm" id="exampleFormControlFile1" name="image">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                          <button type="submit" class="btn btn-primary">Предложить</button>
+                        </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  {%endif%}
             </div>
         </div>
 

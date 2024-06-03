@@ -1,38 +1,122 @@
-{% extends 'base.html' %}
-{% block title %}
-Регистрация
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/style.css">
 
-{% block main %}
-<div class="form-wrapper">
-    <div class="container">
-        <div class=" ">
+    <link type="image/x-icon" href="../static/img/favicon.ico" rel="shortcut icon">
+    <link type="Image/x-icon" href="../static/img/favicon.ico" rel="icon">
+</head>
 
-            <form action="#" method="post" class="mx-auto">
-                <h1>Регистрация</h1>
-                <div class="mb-3">
-                    <input type="text" name="name" class="form-control input-form" placeholder="имя пользователя"
-                        required>
+<body>
+    <div class="head-wrp">
+        <div class="container" bis_skin_checked="1">
+            <header class="d-flex flex-wrap  align-items-center py-4">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none main-logo">
+                    <img src="../static/img/logo.svg" alt="">
+                    <span class="logo-text">Mind <br> Matters</span>
+                </a>
+
+                <ul class="nav nav-pills nav-links">
+                    <li class="nav-item"><a href="/" class="nav-link first-link">Главная</a></li>
+                    <li class="nav-item"><a href="/tests" class="nav-link">Тесты</a></li>
+                    <li class="nav-item"><a href="/articles" class="nav-link">Статьи</a></li>
+                    {%if 'name' in session%}
+                    <li class="nav-item"><a href="/profile" class="nav-link auth">Профиль</a></li>
+                    <li class="nav-item"><a href="/logout" class="nav-link auth">Выйти</a></li>
+                    {% else %}
+                    <li class="nav-item"><a href="/auth" class="nav-link auth">Войти</a></li>
+
+                    {%endif%}
+                </ul>
+
+                <div class="dropdown">
+                    <button class="burger-open" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="../static/img/menu.svg" alt="">
+                    </button>
+                    <ul class="dropdown-menu drop-menu">
+                        <li><a class="dropdown-item" href="/">Главная</a></li>
+                        <li><a class="dropdown-item" href="/tests">Тесты</a></li>
+                        <li><a class="dropdown-item" href="/articles">Статьи</a></li>
+                        {%if 'name' in session%}
+                        <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="/auth">Войти</a></li>
+
+                        {%endif%}
+                    </ul>
                 </div>
-                <div class="mb-3">
-                    <input type="email" name="email" class="form-control input-form" placeholder="email" required>
-                </div>
-                <div class="mb-3">
-                    <input type="password" name="password" class="form-control input-form" placeholder="пароль"
-                        required>
-                </div>
 
-                <button type="submit" class="standart-btn py-2 px-4">Далее</button>
-                {% with messages = get_flashed_messages(True) %}
-                {% if messages %}
-                {% for category, message in messages %}
-                <p class="m-2 flash {{category}}">{{message}}</p>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
-            </form>
+
+            </header>
+        </div>
+    </div>  
+    <div class="form-wrapper">
+        <div class="container">
+            <div class=" ">
+    
+                <form action="#" method="post" class="mx-auto">
+                    <h1>Регистрация</h1>
+                    <div class="mb-3">
+                        <input type="text" name="name" class="form-control input-form" placeholder="имя пользователя"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" name="email" class="form-control input-form" placeholder="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" name="password" class="form-control input-form" placeholder="пароль"
+                            required>
+                    </div>
+    
+                    <button type="submit" class="standart-btn py-2 px-4">Далее</button>
+                    {% with messages = get_flashed_messages(True) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <p class="m-2 text-center flash {{category}}">{{message}}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </form>
+            </div>
         </div>
     </div>
-</div>
-{% endblock %}
+    <footer>
+        <div class="container">
+            <div class="big-footer">
+                <div class="d-flex justify-content-evenly  align-items-center py-4">
+                    <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+                        <img src="../static/img/footer.svg" alt="">
+                        <span class="logo-text-footer">Mind <br> Matters</span>
+                    </a>
+
+                    <ul class="nav nav-pills nav-links-footer">
+                        <li class="nav-item"><a href="/" class="nav-link first-link">Главная</a></li>
+                        <li class="nav-item"><a href="/tests" class="nav-link">Тесты</a></li>
+                        <li class="nav-item"><a href="/articles" class="nav-link">Статьи</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mini-footer">
+                <ul class="nav nav-pills nav-links-footer mx-auto">
+                    <li class="nav-item"><a href="/" class="nav-link first-link">Главная</a></li>
+                    <li class="nav-item"><a href="/tests" class="nav-link">Тесты</a></li>
+                    <li class="nav-item"><a href="/articles" class="nav-link">Статьи</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -32,7 +32,14 @@
 
 .header-wraper {
     background-color: #FA7B04;
+}
 
+.head-wrp-base{
+    background-color: transparent;
+}
+
+.head-wrp{
+    background-color: #FA7B04;
 }
 
 header {
@@ -174,7 +181,7 @@ header {
 .popular-tests div:hover {
     border: #181D2B solid 4px;
     transition: 0.2s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+   
 }
 
 
@@ -195,6 +202,7 @@ header {
  
     border: #181D2B solid 4px;
     border-radius: 30px;
+    margin-top: 20px;
 }
 
 
@@ -262,7 +270,7 @@ header {
 .popular-tests-moblie div:hover {
     border: #181D2B solid 4px;
     transition: 0.2s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+   
 }
 
 
@@ -286,7 +294,7 @@ header {
 .popular-article:hover {
     border: #181D2B solid 4px;
     transition: 0.2s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+  
 }
 
 
@@ -376,7 +384,12 @@ footer ul a:hover {
     color: #F8E6D0;
     background-color: #181D2B;
     transition: 0.5s;
-     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+  
+}
+
+footer .nav-item a:hover{
+    text-decoration: none;
+    color:#FA7B04
 }
 
 .articles-header {
@@ -388,7 +401,7 @@ footer ul a:hover {
     font-family: 'Arkhip';
 }
 
-.articles-header form input {
+#seach-art {
     border: 4px solid #181D2B;
     border-radius: 30px;
     width: 420px;
@@ -428,8 +441,10 @@ footer ul a:hover {
 .articles-grid .article:hover{
     border: 4px solid #181d29;
     transition: 0.2s;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+   
 }
+
+
 
 
 .articles-grid .article a {
@@ -487,7 +502,7 @@ footer ul a:hover {
     background-color: #FFFFFF;
     padding: 30px;
     font-family: "Roboto", sans-serif;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .start-test{
@@ -834,4 +849,25 @@ option[value="#FA7B04"] {
         width: 240px;
     }
 
+}
+
+
+
+.stn-btn {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    border: #181D2B solid 4px;
+    border-radius: 15px;
+    font-size: 18px;
+    color: #181D2B;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: white;
+}
+
+.stn-btn:hover {
+    color: #181D2B;
+    background-color: #FA7B04;
+    transition: 0.5s;
+  
 }
