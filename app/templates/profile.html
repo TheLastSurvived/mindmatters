@@ -1,27 +1,24 @@
-{% extends 'base.html' %}
-{% block title %}
-Профиль
-{% endblock %}
-
-{% block main %}
-{{ ckeditor.load() }}
+{% extends 'base.html' %} {% block title %} Профиль {% endblock %} {% block main
+%} {{ ckeditor.load() }}
 <div class="container my-5">
-  {% with messages = get_flashed_messages(True) %}
-  {% if messages %}
-  {% for category, message in messages %}
+  {% with messages = get_flashed_messages(True) %} {% if messages %} {% for
+  category, message in messages %}
   <p class="m-2 flash {{category}}">{{message}}</p>
-  {% endfor %}
-  {% endif %}
-  {% endwith %}
+  {% endfor %} {% endif %} {% endwith %}
   <div class="row d-flex justify-content-between align-items-center">
     <div class="col">
-      <h1>Профиль{%if active_user.root==1%}(администратор){%else%}(пользователь){%endif%}</h1>
+      <h1>
+        Профиль{%if
+        active_user.root==1%}(администратор){%else%}(пользователь){%endif%}
+      </h1>
     </div>
     {%if active_user.root==1%}
     <div class="col text-end">
-      <a href="/admin" class="stn-btn px-3 py-2">Перейти в панель администратора</a>
+      <a href="/admin" class="stn-btn px-3 py-2"
+        >Перейти в панель администратора</a
+      >
     </div>
-   
+
     {%endif%}
   </div>
 
@@ -36,34 +33,56 @@
     </thead>
     <tbody>
       {%for el1, el2, el3 in zip(rezult_test_list,rezult,interpretation_list)%}
-      <tr>
-        <th>{{el2.date.strftime('%d.%m.%Y %H:%M')}}</th>
+      <tr class="">
+        <td>{{el2.date.strftime('%d.%m.%Y %H:%M')}}</td>
         <td><a href="/test/{{el1.id}}">{{el1.title}}</a></td>
         <td>{{el2.total_score}} баллов</td>
-        <td><button class="stn-btn px-2 py-2" data-bs-toggle="modal"
-            data-bs-target="#exampleModal{{el3.id}}">Подробнее</button> </td>
+        <td class="">
+          <button
+            class="stn-btn mb-2 px-2"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal{{el3.id}}"
+          >
+            Подробнее
+          </button>
+        </td>
+      </tr>
 
-        <div class="modal fade" id="exampleModal{{el3.id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Интерпретация</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                {% autoescape false %}
-                {{el3.text}}
-                {% endautoescape %}
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="stn-btn px-2 py-2" data-bs-dismiss="modal">Закрыть</button>
-              </div>
+      <div
+        class="modal fade"
+        id="exampleModal{{el3.id}}"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Интерпретация
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              {% autoescape false %} {{el3.text}} {% endautoescape %}
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="stn-btn px-2 py-2"
+                data-bs-dismiss="modal"
+              >
+                Закрыть
+              </button>
             </div>
           </div>
         </div>
-
-      </tr>
+      </div>
       {%endfor%}
     </tbody>
   </table>
@@ -74,33 +93,37 @@
   <div class="articles-wrap">
     <h1>Предложеные статьи</h1>
     <div class="articles-grid">
-      {%if articles%}
-      {%for article in articles%}
-      {%if article.root==0%}
+      {%if articles%} {%for article in articles%} {%if article.root==0%}
       <div class="article" style="background-color: {{article.color}};">
-        <a href="/article/{{article.id}}"> <img src="../static/img/upload/{{article.image_name}}" alt="" class="img-fluid"></a>
+        <a href="/article/{{article.id}}">
+          <img
+            src="../static/img/upload/{{article.image_name}}"
+            alt=""
+            class="img-fluid"
+        /></a>
         <p><a href="/article/{{article.id}}">{{article.title}}</a></p>
       </div>
-      {%endif%}
-      {%endfor%}
-      {%else%}
+      {%endif%} {%endfor%} {%else%}
       <h1>Не найдено!</h1>
       {%endif%}
     </div>
 
     <div class="articles-mobile">
-      {%for article in articles%}
-      {%if article.root==0%}
-      <div class="row article-mobile" style="background-color: {{article.color}};">
+      {%for article in articles%} {%if article.root==0%}
+      <div
+        class="row article-mobile"
+        style="background-color: {{article.color}};"
+      >
         <p><a href="/article/{{article.id}}">{{article.title}}</a></p>
-        <a href="/article/{{article.id}}"> <img src="../static/img/upload/{{article.image_name}}" alt=""
-            class="img-fluid"></a>
+        <a href="/article/{{article.id}}">
+          <img
+            src="../static/img/upload/{{article.image_name}}"
+            alt=""
+            class="img-fluid"
+        /></a>
       </div>
-      {%endif%}
-      {%endfor%}
+      {%endif%} {%endfor%}
     </div>
   </div>
 </div>
-{%endif%}
-
-{% endblock %}
+{%endif%} {% endblock %}
