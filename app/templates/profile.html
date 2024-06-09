@@ -35,7 +35,9 @@
       {%for el1, el2, el3 in zip(rezult_test_list,rezult,interpretation_list)%}
       <tr class="">
         <td>{{el2.date.strftime('%d.%m.%Y %H:%M')}}</td>
-        <td><a href="/test/{{el1.id}}">{{el1.title}}</a></td>
+        <td>
+          <a href="/test/{{el1.id}}" style="color: #fa7b04">{{el1.title}}</a>
+        </td>
         <td>{{el2.total_score}} баллов</td>
         <td class="">
           <button

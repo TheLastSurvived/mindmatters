@@ -1,31 +1,116 @@
-{% extends 'base.html' %}
-{% block title %}
-{{article.title}}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{article.title}}</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="../static/css/style.css" />
 
+  <link
+    type="image/x-icon"
+    href="../static/img/favicon.ico"
+    rel="shortcut icon"
+  />
+  <link type="Image/x-icon" href="../static/img/favicon.ico" rel="icon" />
 
-{% block main %}
+</head>
+<body>
+   
 {{ ckeditor.load() }}
-<div>
+<div style="background-color:#f8e6d0" ;>
+    <div class="header">
+        <div class="head-wrp-base">
+          <div class="container" bis_skin_checked="1">
+            <header class="d-flex flex-wrap align-items-center py-4">
+              <a
+                href="/"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none main-logo"
+              >
+                <img src="../static/img/logo.svg" alt="" />
+                <span class="logo-text"
+                  >Mind <br />
+                  Matters</span
+                >
+              </a>
+  
+              <ul class="nav nav-pills nav-links">
+                <li class="nav-item">
+                  <a href="/" class="nav-link first-link">Главная</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/tests" class="nav-link">Тесты</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/articles" class="nav-link">Статьи</a>
+                </li>
+                {%if 'name' in session%}
+                <li class="nav-item">
+                  <a href="/profile" class="nav-link auth">Профиль</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/logout" class="nav-link auth">Выйти</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                  <a href="/auth" class="nav-link auth">Войти</a>
+                </li>
+  
+                {%endif%}
+              </ul>
+  
+              <div class="dropdown">
+                <button
+                  class="burger-open"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <img src="../static/img/menu.svg" alt="" />
+                </button>
+                <ul class="dropdown-menu drop-menu">
+                  <li><a class="dropdown-item" href="/">Главная</a></li>
+                  <li><a class="dropdown-item" href="/tests">Тесты</a></li>
+                  <li><a class="dropdown-item" href="/articles">Статьи</a></li>
+                  {%if 'name' in session%}
+                  <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+                  {% else %}
+                  <li><a class="dropdown-item" href="/auth">Войти</a></li>
+  
+                  {%endif%}
+                </ul>
+              </div>
+            </header>
+          </div>
+        </div>
+      </div>
+
     <div class="container">
 
         {%if 'name' in session and active_user.root==1%}
-
-        <div class="my-3 d-flex justify-content-between align-items-center">
-            <div>
-                <button type="button" class="btn mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #181D2B; color: white;">
-                    Изменить
-                </button>
-                <a href="/delete-article/{{article.id}}" class="btn btn-danger mb-3">Удалить</a>
+        <div class="d-flex justify-content-end">
+            <div class="my-3 d-flex justify-content-between align-items-center">
+                <div>
+                    <button type="button" class="btn change-btn mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Изменить
+                    </button>
+                    <a href="/delete-article/{{article.id}}" class="btn delete-btn mb-3">Удалить</a>
+                </div>
+                {%if article.root==0%}
+                <div class="d-flex align-items-center">
+    
+                    <p class="mx-3">Это статья предложена пользователем</p>
+                    <a href="/add-offer/{{article.id}}"  class="btn btn-success mb-3">Опубликовать для всех</a>
+                </div>
+                {%endif%}
             </div>
-            {%if article.root==0%}
-            <div class="d-flex align-items-center">
-
-                <p class="mx-3">Это статья предложена пользователем</p>
-                <a href="/add-offer/{{article.id}}"  class="btn btn-success mb-3">Опубликовать для всех</a>
-            </div>
-            {%endif%}
         </div>
+      
         {%endif%}
 
 
@@ -106,7 +191,7 @@
             </div>
             {%endif%}
 
-            <div class="text">
+            <div class="text mb-5">
 
                 {% autoescape false %}
                 {{article.text}}
@@ -115,5 +200,57 @@
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
+</div> 
+<footer>
+    <div class="container">
+      <div class="big-footer">
+        <div class="d-flex justify-content-evenly align-items-center py-4">
+          <a
+            href="#"
+            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none"
+          >
+            <img src="../static/img/footer.svg" alt="" />
+            <span class="logo-text-footer"
+              >Mind <br />
+              Matters</span
+            >
+          </a>
+
+          <ul class="nav nav-pills nav-links-footer">
+            <li class="nav-item">
+              <a href="/" class="nav-link first-link">Главная</a>
+            </li>
+            <li class="nav-item">
+              <a href="/tests" class="nav-link">Тесты</a>
+            </li>
+            <li class="nav-item">
+              <a href="/articles" class="nav-link">Статьи</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mini-footer">
+        <ul class="nav nav-pills nav-links-footer mx-auto">
+          <li class="nav-item">
+            <a href="/" class="nav-link first-link">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a href="/tests" class="nav-link">Тесты</a>
+          </li>
+          <li class="nav-item">
+            <a href="/articles" class="nav-link">Статьи</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+</body>
+</html>
+

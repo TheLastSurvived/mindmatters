@@ -794,3 +794,34 @@ option[value="#26BB6B"] {
   background-color: #fa7b04;
   transition: 0.5s;
 }
+
+#btn-index {
+  font-size: 24px;
+}
+
+.delete-btn {
+  background-color: #fa7b04;
+  border-radius: 15px;
+  border: #fa7b04 solid 2px;
+}
+
+.delete-btn:hover {
+  background-color: #181d2b;
+  transition: 300ms;
+  color: white;
+  border: #181d2b solid 2px;
+}
+
+.change-btn {
+  background-color: #181d2b;
+  color: white;
+  border-radius: 15px;
+  border: #181d2b solid 2px;
+}
+
+.change-btn:hover {
+  background-color: white;
+  transition: 300ms;
+  color: #181d2b;
+  border: #181d2b solid 2px;
+}

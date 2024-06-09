@@ -1,177 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mind Matters</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../static/css/style.css" />
 
-    <link type="image/x-icon" href="../static/img/favicon.ico" rel="shortcut icon">
-    <link type="Image/x-icon" href="../static/img/favicon.ico" rel="icon">
+    <link
+      type="image/x-icon"
+      href="../static/img/favicon.ico"
+      rel="shortcut icon"
+    />
+    <link type="Image/x-icon" href="../static/img/favicon.ico" rel="icon" />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="head-wrp">
-        <div class="container" bis_skin_checked="1">
-            <header class="d-flex flex-wrap  align-items-center py-4">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none main-logo">
-                    <img src="../static/img/logo.svg" alt="">
-                    <span class="logo-text">Mind <br> Matters</span>
-                </a>
+      <div class="container" bis_skin_checked="1">
+        <header class="d-flex flex-wrap align-items-center py-4">
+          <a
+            href="/"
+            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none main-logo"
+          >
+            <img src="../static/img/logo.svg" alt="" />
+            <span class="logo-text"
+              >Mind <br />
+              Matters</span
+            >
+          </a>
 
-                <ul class="nav nav-pills nav-links">
-                    <li class="nav-item"><a href="/" class="nav-link first-link">Главная</a></li>
-                    <li class="nav-item"><a href="/tests" class="nav-link">Тесты</a></li>
-                    <li class="nav-item"><a href="/articles" class="nav-link">Статьи</a></li>
-                    {%if 'name' in session%}
-                    <li class="nav-item"><a href="/profile" class="nav-link auth">Профиль</a></li>
-                    <li class="nav-item"><a href="/logout" class="nav-link auth">Выйти</a></li>
-                    {% else %}
-                    <li class="nav-item"><a href="/auth" class="nav-link auth">Войти</a></li>
+          <ul class="nav nav-pills nav-links">
+            <li class="nav-item">
+              <a href="/" class="nav-link first-link">Главная</a>
+            </li>
+            <li class="nav-item">
+              <a href="/tests" class="nav-link">Тесты</a>
+            </li>
+            <li class="nav-item">
+              <a href="/articles" class="nav-link">Статьи</a>
+            </li>
+            {%if 'name' in session%}
+            <li class="nav-item">
+              <a href="/profile" class="nav-link auth">Профиль</a>
+            </li>
+            <li class="nav-item">
+              <a href="/logout" class="nav-link auth">Выйти</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a href="/auth" class="nav-link auth">Войти</a>
+            </li>
 
-                    {%endif%}
-                </ul>
+            {%endif%}
+          </ul>
 
-                <div class="dropdown">
-                    <button class="burger-open" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="../static/img/menu.svg" alt="">
-                    </button>
-                    <ul class="dropdown-menu drop-menu">
-                        <li><a class="dropdown-item" href="/">Главная</a></li>
-                        <li><a class="dropdown-item" href="/tests">Тесты</a></li>
-                        <li><a class="dropdown-item" href="/articles">Статьи</a></li>
-                        {%if 'name' in session%}
-                        <li><a class="dropdown-item" href="/logout">Выйти</a></li>
-                        {% else %}
-                        <li><a class="dropdown-item" href="/auth">Войти</a></li>
+          <div class="dropdown">
+            <button
+              class="burger-open"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img src="../static/img/menu.svg" alt="" />
+            </button>
+            <ul class="dropdown-menu drop-menu">
+              <li><a class="dropdown-item" href="/">Главная</a></li>
+              <li><a class="dropdown-item" href="/tests">Тесты</a></li>
+              <li><a class="dropdown-item" href="/articles">Статьи</a></li>
+              {%if 'name' in session%}
+              <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+              {% else %}
+              <li><a class="dropdown-item" href="/auth">Войти</a></li>
 
-                        {%endif%}
-                    </ul>
-                </div>
-
-
-            </header>
-        </div>
+              {%endif%}
+            </ul>
+          </div>
+        </header>
+      </div>
     </div>
     <div class="header-wraper">
-        <div class="w-100 row d-flex align-items-center header-down">
-            <div class="header-down-text col-lg-6">
-                <div class="text-big">Забота о себе не эгоистична</div>
-                <div class="text-small">Узнавай новое о себе и своем ментальном состоянии</div>
-                <div class="links mt-5">
-                    <a href="/articles" class="m-2 p-3">Подробнее</a>
-                    <a href="/tests" class="m-2 p-3">К тестам</a>
-                </div>
-            </div>
-
+      <div class="w-100 row d-flex align-items-center header-down">
+        <div class="header-down-text col-lg-6">
+          <div class="text-big">Забота о себе не эгоистична</div>
+          <div class="text-small">
+            Узнавай новое о себе и своем ментальном состоянии
+          </div>
+          <div class="links mt-5">
+            <a href="/articles" class="m-2 p-3">Подробнее</a>
+            <a href="/tests" class="m-2 p-3">К тестам</a>
+          </div>
         </div>
-        <div class="header-down-img">
-            <img src="../static/img/main2.svg" alt="" class="img-fluid">
-        </div>
+      </div>
+      <div class="header-down-img">
+        <img src="../static/img/main2.svg" alt="" class="img-fluid" />
+      </div>
     </div>
     <div class="tests">
-        <div class="container">
-            <div class="title-tests">
-                Популярные тесты
-            </div>
-            <div class="popular-tests">
-                {%for test in tests_random%}
-                <div class="test-example" style=" background-color: {{test.color}};">
-                    <a href="/test/{{test.id}}" class="text-link">{{test.title}} </a>
-                    <a href="/test/{{test.id}}"> <img src="../static/img/upload/{{test.image_name}}" class="image-fluid"
-                            width="100%" alt="" srcset=""></a>
-                </div>
-                {%endfor%}
+      <div class="container">
+        <div class="title-tests">Популярные тесты</div>
+        <div class="popular-tests">
+          {%for test in tests_random%}
+          <div class="test-example" style=" background-color: {{test.color}};">
+            <a href="/test/{{test.id}}" class="text-link">{{test.title}} </a>
+            <a href="/test/{{test.id}}">
+              <img
+                src="../static/img/upload/{{test.image_name}}"
+                class="image-fluid"
+                width="100%"
+                alt=""
+                srcset=""
+            /></a>
+          </div>
+          {%endfor%}
 
-                <div class="more">
-                    <a href="/tests" class="">Смотреть еще</a>
-                </div>
-
-            </div>
-
-            <div class="popular-tests-moblie">
-                {%for test in tests_random%}
-                <div class="row" style=" background-color: {{test.color}};">
-                    <a href="/test/{{test.id}}"> <img src="../static/img/upload/{{test.image_name}}" class="image-fluid"
-                            width="30%" alt="" srcset=""></a>
-                    <a href="/test/{{test.id}}" class="text-link">Тест на тип любви </a>
-                </div>
-                {%endfor%}
-
-
-
-
-                <div class="links">
-                    <a href="/tests" class="p-3">Смотреть еще</a>
-                </div>
-
-
-            </div>
-
+          <div class="more">
+            <a href="/tests" class="">Смотреть еще</a>
+          </div>
         </div>
+
+        <div class="popular-tests-moblie">
+          {%for test in tests_random%}
+          <div class="row" style=" background-color: {{test.color}};">
+            <a href="/test/{{test.id}}">
+              <img
+                src="../static/img/upload/{{test.image_name}}"
+                class="image-fluid"
+                width="30%"
+                alt=""
+                srcset=""
+            /></a>
+            <a href="/test/{{test.id}}" class="text-link">{{test.title}} </a>
+          </div>
+          {%endfor%}
+
+          <div class="links">
+            <a href="/tests" class="p-3">Смотреть еще</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="articles">
-        <div class="container">
+      <div class="container">
+        <div class="title-articles">Популярные статьи</div>
 
-            <div class="title-articles">
-                Популярные статьи
+        <div class="article-list">
+          {%for article in article_random%}
+          <div
+            class="popular-article"
+            style=" background-color: {{article.color}};"
+          >
+            <img
+              src="../static/img/upload/{{article.image_name}}"
+              alt=""
+              width="25%"
+            />
+            <div class="article-text">
+              <a
+                href="/article/{{article.id}}"
+                class="text-decoration-none text-dark"
+                >{{article.title}}</a
+              >
             </div>
+          </div>
+          {%endfor%}
 
-            <div class="article-list">
-                {%for article in article_random%}
-                <div class="popular-article" style=" background-color: {{article.color}};">
-                    <img src="../static/img/upload/{{article.image_name}}" alt="" width="25%">
-                    <div class="article-text">
-                        <a href="/article/{{article.id}}" class="text-decoration-none text-dark">{{article.title}}</a>
-                    </div>
-                </div>
-                {%endfor%}
-
-
-                <div class="links ">
-                    <a href="/articles" class="p-3">Смотреть еще</a>
-                </div>
-
-
-            </div>
+          <div class="links">
+            <a href="/articles" id="btn-index" class="p-3 text-center"
+              >Смотреть еще</a
+            >
+          </div>
         </div>
+      </div>
     </div>
     <footer>
-        <div class="container">
-            <div class="big-footer">
-                <div class="d-flex justify-content-evenly  align-items-center py-4">
-                    <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
-                        <img src="../static/img/footer.svg" alt="">
-                        <span class="logo-text-footer">Mind <br> Matters</span>
-                    </a>
+      <div class="container">
+        <div class="big-footer">
+          <div class="d-flex justify-content-evenly align-items-center py-4">
+            <a
+              href="#"
+              class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none"
+            >
+              <img src="../static/img/footer.svg" alt="" />
+              <span class="logo-text-footer"
+                >Mind <br />
+                Matters</span
+              >
+            </a>
 
-                    <ul class="nav nav-pills nav-links-footer">
-                        <li class="nav-item"><a href="/" class="nav-link first-link">Главная</a></li>
-                        <li class="nav-item"><a href="/tests" class="nav-link">Тесты</a></li>
-                        <li class="nav-item"><a href="/articles" class="nav-link">Статьи</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="mini-footer">
-                <ul class="nav nav-pills nav-links-footer mx-auto">
-                    <li class="nav-item"><a href="/" class="nav-link first-link">Главная</a></li>
-                    <li class="nav-item"><a href="/tests" class="nav-link">Тесты</a></li>
-                    <li class="nav-item"><a href="/articles" class="nav-link">Статьи</a></li>
-                </ul>
-            </div>
-
+            <ul class="nav nav-pills nav-links-footer">
+              <li class="nav-item">
+                <a href="/" class="nav-link first-link">Главная</a>
+              </li>
+              <li class="nav-item">
+                <a href="/tests" class="nav-link">Тесты</a>
+              </li>
+              <li class="nav-item">
+                <a href="/articles" class="nav-link">Статьи</a>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <div class="mini-footer">
+          <ul class="nav nav-pills nav-links-footer mx-auto">
+            <li class="nav-item">
+              <a href="/" class="nav-link first-link">Главная</a>
+            </li>
+            <li class="nav-item">
+              <a href="/tests" class="nav-link">Тесты</a>
+            </li>
+            <li class="nav-item">
+              <a href="/articles" class="nav-link">Статьи</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-</body>
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
